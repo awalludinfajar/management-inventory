@@ -1,0 +1,10 @@
+/* custom.css */
+.react-datepicker-wrapper {
+    display: block !important; /* Override the default inline-block */
+    width: 100%; /* Make the wrapper take the full width */
+  }
+  
+  .react-datepicker__input-container {
+    width: 100%; /* Ensure the input inside also takes full width */
+  }
+  
