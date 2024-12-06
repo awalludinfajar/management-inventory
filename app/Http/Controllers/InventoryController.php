@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InventoriesExport;
 use App\Http\Requests\InventroyRequest;
 use App\KategoriBarang;
 use App\Models\TableInventory;
@@ -9,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InventoryController extends Controller
 {
@@ -71,5 +73,10 @@ class InventoryController extends Controller
 
         $data->delete();
         return response()->json(['message' => 'Data Successfully Deleted']);
+    }
+
+    public function export() {
+        $fileName = 'data-inventaris_' . now()->format('Y_m_d') . '.csv';
+        return Excel::download(new InventoriesExport, $fileName);
     }
 }

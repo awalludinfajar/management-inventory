@@ -13,4 +13,5 @@ Route::prefix('page')->group(function () {
     Route::get('/inventaris/{id}', [InventoryController::class, 'form'])->name('page.form');
     Route::Post('/inventaris/{id}', [InventoryController::class, 'store'])->name('data.input');
     Route::Delete('/inventaris/{id}', [InventoryController::class, 'delete'])->name('data.remove');
+    Route::get('/download/inventaris', [InventoryController::class, 'export'])->name('data.download');
 });

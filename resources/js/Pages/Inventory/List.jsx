@@ -5,6 +5,7 @@ import TextInput from "../../Components/TextInput";
 import PrimaryButton from "../../Components/PrimaryButton";
 import Table from "./Table";
 import SelectOption from "../../Components/SelectOption";
+import SecondaryButton from "../../Components/SecondaryButton";
 
 const InventoryPage = ({data, kategori_barang}) => {
     const inventory = data || [];
@@ -32,6 +33,25 @@ const InventoryPage = ({data, kategori_barang}) => {
     };
 
     const pageInput = route('page.form', 0);
+    // const tableDownload = route('data.download');
+    const handleExport = () => {
+        console.log("test");
+        
+        const downloadUrl = route('data.download'); // The endpoint for downloading the file
+        const fileName = 'data-inventaris_' + new Date().toISOString().split('T')[0] + '.csv';
+        
+        // Create an invisible link element
+        const link = document.createElement('a');
+        link.href = downloadUrl; // Set the href to the download URL
+        link.download = fileName; // Set the desired file name
+        document.body.appendChild(link);
+
+        // Trigger the download
+        link.click();
+
+        // Clean up the link element
+        document.body.removeChild(link);
+    };
     return (
         <>
             <Head title="Inventory page" />
@@ -57,9 +77,14 @@ const InventoryPage = ({data, kategori_barang}) => {
                                             onModelValueChange={handleCategoryChange}
                                         />
                                     </div>
-                                    <Link href={pageInput}>
-                                        <PrimaryButton>Create new</PrimaryButton>
-                                    </Link>
+                                    <div className="flex items-center gap-2">
+                                        <Link onClick={handleExport}>
+                                            <SecondaryButton type="submit">Export Csv</SecondaryButton>
+                                        </Link>
+                                        <Link href={pageInput}>
+                                            <PrimaryButton>Create new</PrimaryButton>
+                                        </Link>
+                                    </div>
                                 </div>
                                 <Table data={filterData} />
                             </section>
