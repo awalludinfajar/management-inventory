@@ -1,6 +1,6 @@
 [build]
   # Chain multiple commands
-  command = "composer install && npm install && npm run build && php artisan serve"
+  command = "composer install && npm install"
   publish = "public"
 
 [[redirects]]
