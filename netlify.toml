@@ -1,0 +1,9 @@
+[build]
+  # Chain multiple commands
+  command = "composer install && npm install && npm run prod && php artisan view:cache"
+  publish = "public"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.php"
+  status = 200
